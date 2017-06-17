@@ -19,7 +19,7 @@ public func localVersion() -> SemanticVersion {
 }
 
 public func remoteVersion() -> SemanticVersion? {
-	let latestRemoteVersion = Client(.dotCom)
+	let latestRemoteVersion = Client(.dotCom, urlSession: URLSession.makeProxyConfiguredSession())
 		.execute(Repository(owner: "Carthage", name: "Carthage").releases, perPage: 2)
 		.map { _, releases in
 			return releases.first { !$0.isDraft }!
